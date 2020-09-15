@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  ports:
+    - port: 3000
+  selector:
+    app: frontend
+    tier: app
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+      tier: app
+  template:
+    metadata:
+      labels:
+        app: frontend
+        tier: app
+    spec:
+      containers:
+        - image: frontend
+          imagePullPolicy: Never
+          name: frontend
+          env:
+            - name: PORT
+              value: "3000"
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 40Mi
+          #   limits:
+          #     cpu: 200m
+          #     memory: 80Mi
+          ports:
+            - containerPort: 3000
+              name: frontend
+          # livenessProbe:
+          #   httpGet:
+          #     path: /server/health
+          #     port: 3000
+          #   initialDelaySeconds: 3
+          #   periodSeconds: 60 # 開発環境ではアクセスログが大量に流れないように間隔を長くしておく
+          # securityContext:
+          #   runAsNonRoot: true
+          #   capabilities:
+          #     drop:
+          #       - all
+          #     add:
+          #       - NET_BIND_SERVICE
+          #   readOnlyRootFilesystem: true
+      # volumes:
+      #   - name: frontend-app-secret-volume
+      #     secret:
+      #       secretName: frontend-app-secret

@@ -34,3 +34,5 @@ make up
 
 ## 参考
 - [dilmnqvovpnmlib / Hatena-Intern-2020 ](https://github.com/dilmnqvovpnmlib/Hatena-Intern-2020)
+- [WiKi](https://github.com/dilmnqvovpnmlib/KBlog/wiki)
+- [Log](https://github.com/dilmnqvovpnmlib/KBlog/wiki/Log)

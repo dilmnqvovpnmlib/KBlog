@@ -1,1 +1,1 @@
-minikube -n kblog service blog
+minikube -n kblog service "$1"
